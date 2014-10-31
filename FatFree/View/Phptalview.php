@@ -1,15 +1,23 @@
 <?php
 /**
- * Class is responsible of setting up the header and footer template 
- * @package FatFree/View
+ * Class responsible of setting PHPTAL as a View engine for FatFree Framework
+ * @package FatFree\View
  * @copyright Copyright (c) 2006-2014 creoLIFE
  * @author Mirek Ratman
  * @version 1.0
  * @since 2014-11-01
+ * @license The MIT License (MIT), Copyright (c) 2014 creoLIFE Miroslaw Ratman, Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace FatFree\View;
 
+use Filters\Headerfooter;
+
 class Phptalview extends \View {
+
+    /**
+    * @var [mixed] - view instance
+    */
+    protected $view = '';
 
     /**
      * Class constructor
@@ -47,6 +55,7 @@ class Phptalview extends \View {
     public function render( $file, $mime = 'text/html', array $hieve = null, $ttl = 0 ){
         try {
             self::setOutputMode( $mime );
+            //$this->view->addPreFilter( $this->filterHeaderFooter );
             $this->view->setTemplate( $file );
             return $this->view->execute();
         }
@@ -57,93 +66,12 @@ class Phptalview extends \View {
     }
 
     /**
-     * Method will set encoding
-     * @param [string] $encoding - example utf-8
+     * Method will get instance of PHPTAL view
+     * @return [mixed]
      */
-    public function setEncoding( $encoding ){
-        $this->view->setEncoding( $encoding ); 
+    public function getInstance(){
+        return $this->view; 
     }
-
-    /**
-     * Method will set repository path
-     * @param [mixed] $path
-     */
-    public function setTemplateRepository( $path ){
-        $this->view->setTemplateRepository( $path ); 
-    }
-
-    /**
-     * Method will set destination directory of PHP files
-     * @param [mixed] $path
-     */
-    public function setPhpCodeDestination( $path ){
-        $this->view->setPhpCodeDestination( $path ); 
-    }
-
-    /**
-     * Method will set PHP files extension
-     * @param [string] $ext
-     */
-    public function setPhpCodeExtension( $ext ){
-        $this->view->setPhpCodeExtension( $ext ); 
-    }
-
-    /**
-     * Method will set PHP files extension
-     * @param [int] $lifetime - in days
-     */
-    public function setCacheLifetime( $lifetime ){
-        $this->view->setCacheLifetime( $lifetime ); 
-    }
-
-    /**
-     * Method will force PHPTAL to reparse template
-     * @param [boolean] $force - in days
-     */
-    public function setForceReparse( $force ){
-        $this->view->setForceReparse( $force ); 
-    }
-
-    /**
-     * Method will get encoding
-     * @return [string]
-     */
-    public function getEncoding(){
-        return $this->view->getEncoding(); 
-    }
-
-    /**
-     * Method will get destination directory of PHP files
-     * @return [string]
-     */
-    public function getPhpCodeDestination(){
-        return $this->view->getPhpCodeDestination();
-    }
-
-    /**
-     * Method will get PHP files extension
-     * @return [string]
-     */
-    public function getPhpCodeExtension(){
-        return $this->view->getPhpCodeExtension(); 
-    }
-
-    /**
-     * Method will get PHP files extension
-     * @return [string]
-     */
-    public function getCacheLifetime(){
-        return $this->view->getCacheLifetime(); 
-    }
-
-    /**
-     * Method will get PHPTAL attribute of force reparse
-     * @return [boolean]
-     */
-    public function getForceReparse(){
-        return $this->view->getForceReparse(); 
-    }
-
 
     /**
      * Varible setter
@@ -153,5 +81,6 @@ class Phptalview extends \View {
     public function __set( $data, $value ){
         $this->view->set($data, $value); 
     }
+
 }
 

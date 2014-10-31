@@ -22,42 +22,7 @@ class PhptalViewTest extends PHPUnit_Framework_TestCase
 
 	public function __construct()
 	{
-		$this->view = new \FatFree\View\Phptalview();
-	}
-
-	public function testSetEncoding()
-	{
-		$this->view->setEncoding( self::TPL_ENCODING );
-		$this->assertEquals($this->view->getEncoding(), self::TPL_ENCODING );
-	}
-
-	public function testSetTemplateRepository()
-	{
-		$this->assertNull( $this->view->setTemplateRepository( __DIR__ . self::DIR_VIEW ) );
-	}
-
-	public function testSetPhpCodeDestination()
-	{
-		$this->view->setPhpCodeDestination( __DIR__ . self::DIR_TMP );
-		$this->assertNotNull($this->view->getPhpCodeDestination() );
-	}
-
-	public function testSetPhpCodeExtension()
-	{
-		$this->view->setPhpCodeExtension( self::TPL_EXT );
-		$this->assertEquals($this->view->getPhpCodeExtension(), self::TPL_EXT );
-	}
-
-	public function testSetCacheLifetime()
-	{
-		$this->view->setCacheLifetime( self::TPL_LIFETIME );
-		$this->assertEquals($this->view->getCacheLifetime(), self::TPL_LIFETIME );
-	}
-
-	public function testSetForceReparse()
-	{
-		$this->view->setForceReparse( false );
-		$this->assertFalse($this->view->getForceReparse() );
+        $this->view = new \FatFree\View\Phptalview();
 	}
 
 	public function testRender()
