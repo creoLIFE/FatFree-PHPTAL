@@ -1,0 +1,1 @@
+Directory "tmp" and "dest" must have read/write access attributes for PHP
