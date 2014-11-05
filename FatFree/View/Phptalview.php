@@ -45,7 +45,7 @@ class Phptalview extends \View {
     }
 
     /**
-     * Class constructor
+     * Render method will return string
      * @param [string] $file
      * @param [string] $mime - [text/html, text/xml, etc.]
      * @param [array] $hieve
@@ -63,6 +63,18 @@ class Phptalview extends \View {
             echo "Exception thrown while processing template\n";
             echo $e;
         }
+    }
+
+    /**
+     * Display method will display rendered content
+     * @param [string] $file
+     * @param [string] $mime - [text/html, text/xml, etc.]
+     * @param [array] $hieve
+     * @param [int] $ttl
+     * @return [html]
+     */
+    public function display( $file, $mime = 'text/html', array $hieve = null, $ttl = 0 ){
+        echo self::render($file, $mime, $hieve, $ttl);
     }
 
     /**
