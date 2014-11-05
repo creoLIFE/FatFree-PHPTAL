@@ -1,7 +1,6 @@
-.idea/
 .idea/*
+vendor/*
+report/*
+test/*
 composer.lock
-/composer.phar
-/composer_2.phar
-/vendor
-/report
+composer.phar
