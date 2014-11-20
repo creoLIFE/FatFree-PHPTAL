@@ -13,7 +13,7 @@
          bootstrap="vendor/autoload.php"
 >
     <testsuites>
-        <testsuite name="PhptalView">
+        <testsuite name="Helpers">
             <file>test/ViewTest.php</file>
         </testsuite>
     </testsuites>
