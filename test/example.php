@@ -17,6 +17,7 @@ echo "\n---------\n";
 
 //PhpTal View engine with header and footer separated and some functionality from PHPTAL
 $view = new \FatFree\View\Phptalview;
+$view->setCleanMode(0);
 
 $viewInstance = $view->getInstance();
 $viewInstance->setForceReparse(true);

@@ -20,12 +20,25 @@ class Phptalview extends \View {
     protected $view = '';
 
     /**
+    * @var [integer] - output clean mode
+    */
+    protected $cleanMode = 0;
+
+    /**
      * Class constructor
      * @param [string] $dirTemplateCache - path to template cache directory
      */
     public function __construct() {
         $this->view = new \PHPTAL();
-    } 
+    }
+
+    /**
+     * Method will set clean mode
+     * @param [integer] $mode
+     */
+    public function setCleanMode( $mode = 0 ){
+        $this->cleanMode = $mode;
+    }
 
     /**
      * Method will set output mode
@@ -57,7 +70,7 @@ class Phptalview extends \View {
             self::setOutputMode( $mime );
             //$this->view->addPreFilter( $this->filterHeaderFooter );
             $this->view->setTemplate( $file );
-            return $this->view->execute();
+            return $this->doCleaning( $this->view->execute() );
         }
         catch (Exception $e){
             echo "Exception thrown while processing template\n";
@@ -82,7 +95,7 @@ class Phptalview extends \View {
      * @return [mixed]
      */
     public function getInstance(){
-        return $this->view; 
+        return $this->view;
     }
 
     /**
@@ -91,7 +104,24 @@ class Phptalview extends \View {
      * @param [string] $value
      */
     public function __set( $data, $value ){
-        $this->view->set($data, $value); 
+        $this->view->set($data, $value);
+    }
+
+    /**
+     * Method will clean output from comments
+     * @param [string] $content
+     * @return [string]
+     */
+    private function doCleaning( $content ){
+        switch( $this->cleanMode ){
+            case 1:
+                return preg_replace('/[\t\v\n\r\f]*<!(?:--[^\[][\s\S]*?--\s*)?>[\t\v\n\r\f]*/', '', $content);
+            break;
+            default:
+            case 0:
+                return $content;
+            break;
+        }
     }
 
 }
