@@ -22,6 +22,6 @@
         "php"                   : ">=5.3.0",
         "phpunit/phpunit"       : "4.3.*",
         "phptal/phptal"         : "1.3.*",
-        "bcosca/fatfree"        : "3.2.*"
+        "bcosca/fatfree"        : "3.3.0"
     }
 }
